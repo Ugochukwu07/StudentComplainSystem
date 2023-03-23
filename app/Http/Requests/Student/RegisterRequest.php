@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
             'name' => 'string|required',
             'reg_number' => 'string|required|unique:profiles,reg_number',
             'email' => 'required|email',
-            'department_id' => 'required|numeric|exists:departments,id',
+            // 'department_id' => 'nullable|numeric|exists:departments,id',
             'password' => 'required|string|confirmed',
             'password_confirmation' => 'required|string',
         ];

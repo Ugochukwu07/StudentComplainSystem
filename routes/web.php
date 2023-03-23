@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Student\ComplainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ require('auth.php');
 
 
 //Students
-Route::prefix('user')->name('user.')->middleware(['auth', 'user'])->group(function(){
+Route::prefix('student')->name('student.')->middleware('auth', 'student')->group(function(){
     Route::controller(MainController::class)->group(function(){
         Route::get('/', 'overview')->name('overview');
 
@@ -36,6 +37,13 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'user'])->group(functi
 
         Route::get('/account', 'account')->name('account');
         Route::post('/account/save/{id}', 'accountSave')->name('account.save');
+    });
+
+    Route::controller(ComplainController::class)->prefix('complain')->name('complain.')->group(function(){
+        Route::get('/v/{type}', 'index')->name('index');
+
+        Route::get('/create', '')->name('create');
+        Route::post('/create/save', 'store')->name('create.save');
     });
 });
 

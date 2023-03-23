@@ -9,8 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Service\Student\MainService;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Student\ProfileUpdateRequest;
-use Illuminate\Contracts\View\Factory;
+use App\Models\Complain;
 use Illuminate\Http\RedirectResponse;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -19,9 +20,15 @@ class MainController extends Controller
      *
      * @return Factory
      */
-    public function overview(): Factory
+    public function overview()
     {
-        return view('student.overview');
+        $data = new stdClass;
+
+        $data->complain_count = Complain::count();
+        $data->complain_completed_count = Complain::where('status', 1)->count();
+        $data->complain_pending_count = Complain::where('status', 0)->count();
+
+        return view('student.overview', compact('data'));
     }
 
 
@@ -30,7 +37,7 @@ class MainController extends Controller
      *
      * @return Factory
      */
-    public function profile(): Factory
+    public function profile()
     {
         $profile = Profile::where('user_id', auth()->user()->id)->first();
         return view('student.profile', compact('profile'));
@@ -58,9 +65,9 @@ class MainController extends Controller
     /**
      * update authentication account details
      *
-     * @return Factory
+     * @return View
      */
-    public function account(): Factory
+    public function account()
     {
         return view('student.profile',);
     }

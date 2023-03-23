@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-                        <input type="text" class="form-control ps-15 bg-transparent" placeholder="Full Name">
+                        <input value="{{ old('name') }}" type="text" name="name" class="form-control ps-15 bg-transparent" placeholder="Full Name">
                     </div>
                     @error('name')
                         <span class="text-danger">{{ $message }}</span>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
-                        <input type="email" class="form-control ps-15 bg-transparent" name="email" placeholder="Email">
+                        <input value="{{ old('email') }}" type="email" class="form-control ps-15 bg-transparent" name="email" placeholder="Email">
                     </div>
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-more"></i></span>
-                        <input type="text" class="form-control ps-15 bg-transparent" name="reg_number" placeholder="Reg Number">
+                        <input value="{{ old('reg_number') }}" type="text" class="form-control ps-15 bg-transparent" name="reg_number" placeholder="Reg Number">
                     </div>
                     @error('reg_number')
                         <span class="text-danger">{{ $message }}</span>
@@ -43,7 +43,7 @@
                         <select class="form-select-mg bg-transparent form-control" name="department_id" id="department_id">
                             <option>Select Your Department</option>
                             @foreach ($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                <option {{ $department->id == old('department_id') ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
                             @endforeach
                         </select>
                         {{-- <input type="text" class="form-control ps-15 bg-transparent" name="reg_number" placeholder="Reg Number"> --}}
@@ -72,7 +72,7 @@
                 </div>
                   <div class="row">
                     <div class="col-12 text-center">
-                      <button type="submit" class="btn btn-info margin-top-10">SIGN IN</button>
+                      <button type="submit" class="btn btn-info margin-top-10">SIGN UP</button>
                     </div>
                     <!-- /.col -->
                   </div>
