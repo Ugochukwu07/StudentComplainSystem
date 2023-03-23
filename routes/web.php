@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\MainController as AdminMainController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 
