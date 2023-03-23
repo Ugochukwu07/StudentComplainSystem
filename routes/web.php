@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Student\MainController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\DepartmentController;
-use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Student\ComplainController;
+use App\Http\Controllers\Admin\MainController as AdminMainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,4 +95,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
         Route::get('/delete/{id}/{soft}', 'delete')->name('delete');
     });
+});
+
+//Artisan
+Route::get('/artisan/{command}', function($command){
+    if($command == 'migrate'){
+        $output = ['--force' => true];
+    }else{
+        $output = [];
+    }
+    Artisan::call($command, $output);
+    dd(Artisan::output());
 });
