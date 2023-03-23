@@ -37,7 +37,7 @@ class AuthController extends Controller
      * @param  RegisterRequest $request
      * @return Http\RedirectResponse
      */
-    public function registerSave(RegisterRequest $request): Http\RedirectResponse
+    public function registerSave(RegisterRequest $request)
     {
         $user = (new AuthService())->storeStudent($request);
 

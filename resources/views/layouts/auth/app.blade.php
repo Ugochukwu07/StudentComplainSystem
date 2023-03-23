@@ -20,14 +20,14 @@
 
 </head>
 
-<body class="hold-transition theme-primary bg-img" style="background-image: url({{ asset('images/auth-bg/bg-2.jpg') }})">
+<body class="hold-transition theme-primary bg-img" style="background-image: url({{ asset('images/auth-bgg.jpg') }})">
 
 	<div class="container h-p100">
 		<div class="row align-items-center justify-content-md-center h-p100">
 
 			<div class="col-12">
 				<div class="row justify-content-center g-0">
-                    @yield('conent')
+                    @yield('content')
 				</div>
 			</div>
 		</div>
