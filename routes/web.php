@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\MainController as AdminMainController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return view('auth.login');
 });
 
 
