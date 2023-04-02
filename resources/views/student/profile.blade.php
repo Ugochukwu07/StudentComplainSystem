@@ -32,7 +32,8 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li><a href="#activity" data-bs-toggle="tab">Activity</a></li>
-                            <li><a class="active"  href="#settings" data-bs-toggle="tab">Settings</a></li>
+                            <li><a class="{{ $settings ? 'active' : '' }}" href="#settings" data-bs-toggle="tab">Settings</a></li>
+                            <li><a class="{{ $account ? 'active' : '' }}" href="#account" data-bs-toggle="tab">Account</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -275,6 +276,50 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                        <div class="form-group row">
+                                            <div class="ms-auto col-sm-10">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="active tab-pane" id="account">
+
+                                <div class="box p-10 no-shadow">
+                                    <form class="form-horizontal form-element col-12" method="POST" action="{{ route('student.account.save', ['id' => Auth::user()->id]) }}">
+                                        <div class="form-group row">
+                                            @csrf
+                                            <label for="email" class="col-sm-2 form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="email" class="form-control" value="{{ $profile->email }}" id="email" placeholder="Your Email Address">
+                                                @error('email')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="password" class="col-sm-2 form-label">New Password</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" name="password" placeholder="Input Your New Password">
+                                                @error('password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="password" class="col-sm-2 form-label">Confrim New Password</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" name="password_confirmation" placeholder="Input Your New Password Confirmation">
+                                                @error('password_confirmation')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <div class="form-group row">
                                             <div class="ms-auto col-sm-10">
                                                 <button type="submit" class="btn btn-success">Submit</button>

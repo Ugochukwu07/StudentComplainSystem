@@ -32,8 +32,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('student.profile') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Profile</a></li>
-                        <li><a href="{{ route('student.account') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Authentication</a></li>
+                        <li><a href="{{ route('student.profile', ['type' => 1]) }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Profile</a></li>
+                        <li><a href="{{ route('student.profile', ['type' => 2]) }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Authentication</a></li>
 				    </ul>
 				</li>
 				<li class="header">COMPLAINS </li>

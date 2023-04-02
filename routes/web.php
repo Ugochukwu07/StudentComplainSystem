@@ -33,7 +33,7 @@ Route::prefix('student')->name('student.')->middleware('auth', 'student')->group
     Route::controller(MainController::class)->group(function(){
         Route::get('/', 'overview')->name('overview');
 
-        Route::get('/profile', 'profile')->name('profile');
+        Route::get('/profile/{type}', 'profile')->name('profile');
         Route::post('/profile/save/{id}', 'profileSave')->name('profile.save');
 
         Route::get('/account', 'account')->name('account');

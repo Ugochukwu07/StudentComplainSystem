@@ -39,7 +39,7 @@ class MainController extends Controller
      *
      * @return Factory
      */
-    public function profile()
+    public function profile($type)
     {
         $profile = Profile::where('user_id', auth()->user()->id)->first();
         $faculties = Faculty::all();
@@ -48,7 +48,12 @@ class MainController extends Controller
 
         $data = new stdClass;
         $data->complain_count = Complain::where('student_id', auth()->user()->id)->count();
-        return view('student.profile', compact('profile', 'data', 'faculties', 'departments', 'levels'));
+        if($type == 1){
+            $settings = true; $account = false;
+        }else{
+            $settings = false; $account = true;
+        }
+        return view('student.profile', compact('profile', 'data', 'faculties', 'departments', 'levels', 'settings', 'account'));
     }
 
 

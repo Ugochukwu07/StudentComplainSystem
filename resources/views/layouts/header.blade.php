@@ -41,8 +41,8 @@
             </a>
             <ul class="dropdown-menu animated flipInX">
               <li class="user-body">
-				 <a class="dropdown-item" href="{{ route('student.profile') }}"><i class="ti-user text-muted me-2"></i> Profile</a>
-				 <a class="dropdown-item" href="{{ route('student.account') }}"><i class="ti-wallet text-muted me-2"></i> Authentication</a>
+				 <a class="dropdown-item" href="{{ route('student.profile', ['type' => 1]) }}"><i class="ti-user text-muted me-2"></i> Profile</a>
+				 <a class="dropdown-item" href="{{ route('student.profile', ['type' => 2]) }}"><i class="ti-wallet text-muted me-2"></i> Authentication</a>
 				 {{-- <a class="dropdown-item" href="#"><i class="ti-settings text-muted me-2"></i> Settings</a> --}}
 				 <div class="dropdown-divider"></div>
 				 <a class="dropdown-item" href="{{ route('logout') }}"><i class="ti-lock text-muted me-2"></i> Logout</a>
