@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\OfficeController;
 use App\Http\Controllers\Student\MainController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudentController;
@@ -50,12 +51,19 @@ Route::prefix('student')->name('student.')->middleware('auth', 'student')->group
 
 //Admins
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function(){
-    
+
     Route::controller(AdminMainController::class)->name('main.')->prefix('main')->group(function(){
         Route::get('/', 'overview')->name('overview');
 
         Route::get('/profile', 'profile')->name('profile');
         Route::post('/profile/save', 'profileSave')->name('profile.save');
+    });
+
+    Route::controller(ComplainController::class)->prefix('complain')->name('complain.')->group(function(){
+        Route::get('/v/{type}', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create/save', 'store')->name('create.save');
     });
 
 

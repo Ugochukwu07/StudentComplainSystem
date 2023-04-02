@@ -27,7 +27,7 @@ class AddOfficeRequest extends FormRequest
             'name' => ['required', 'string', 'unique:offices,name', 'min:4'],
             'address' => 'required|string',
             'department_id' => 'required|numeric|exists:departments,id',
-            'faculty_id' => 'required|numeric|exists:faculties,id'
+            // 'faculty_id' => 'required|numeric|exists:faculties,id'
         ];
     }
 }

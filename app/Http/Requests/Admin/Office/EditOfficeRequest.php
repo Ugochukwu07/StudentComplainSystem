@@ -27,7 +27,7 @@ class EditOfficeRequest extends FormRequest
             'name' => 'required|string|min:4',
             'address' => 'required|string',
             'department_id' => 'required|numeric|exists:departments,id',
-            'faculty_id' => 'required|numeric|exists:faculties,id'
+            // 'faculty_id' => 'required|numeric|exists:faculties,id'
         ];
     }
 }

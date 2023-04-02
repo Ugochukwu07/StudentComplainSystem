@@ -49,11 +49,42 @@
 	<script src="{{ asset('assets/vendor_components/Flot/jquery.flot.js') }}"></script>
 	<script src="{{ asset('assets/vendor_components/Flot/jquery.flot.resize.js') }}"></script>
     @yield('vendor_js')
+
+    <script src="{{ asset('admin/vendor_components/datatable/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/pages/sampledata1.js') }}"></script>
 
 	<!-- Master Admin App -->
 	<script src="{{ asset('js/template.js') }}"></script>
 	<script src="{{ asset('js/pages/dashboard.js') }}"></script>
+
+    <script src="{{ asset('admin/js/pages/custom-scroll.js') }}"></script>
+
+    <script>
+        $('#departments').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : true,
+        });
+        $('#faculties').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : true,
+        });
+        $('#offices').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : true,
+        });
+    </script>
     @yield('js')
 
 </body>

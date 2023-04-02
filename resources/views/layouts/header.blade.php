@@ -1,7 +1,7 @@
 <header class="main-header">
 	<div class="d-flex align-items-center logo-box justify-content-start">
 		<!-- Logo -->
-		<a href="{{ Auth::user()->admin ? route('admin.overview') : route('student.overview') }}" class="logo">
+		<a href="{{ Auth::user()->admin ? route('admin.main.overview') : route('student.overview') }}" class="logo">
 		  <!-- logo-->
 		  <div class="logo-mini w-30">
 			  <span class="light-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
@@ -41,8 +41,12 @@
             </a>
             <ul class="dropdown-menu animated flipInX">
               <li class="user-body">
-				 <a class="dropdown-item" href="{{ route('student.profile', ['type' => 1]) }}"><i class="ti-user text-muted me-2"></i> Profile</a>
-				 <a class="dropdown-item" href="{{ route('student.profile', ['type' => 2]) }}"><i class="ti-wallet text-muted me-2"></i> Authentication</a>
+                @if(Auth::user()->admin)
+				    <a class="dropdown-item" href="{{ route('admin.main.profile') }}"><i class="ti-user text-muted me-2"></i> Profile</a>
+				@else
+                    <a class="dropdown-item" href="{{ route('student.profile', ['type' => 1]) }}"><i class="ti-user text-muted me-2"></i> Profile</a>
+				    <a class="dropdown-item" href="{{ route('student.profile', ['type' => 2]) }}"><i class="ti-wallet text-muted me-2"></i> Authentication</a>
+                @endif
 				 {{-- <a class="dropdown-item" href="#"><i class="ti-settings text-muted me-2"></i> Settings</a> --}}
 				 <div class="dropdown-divider"></div>
 				 <a class="dropdown-item" href="{{ route('logout') }}"><i class="ti-lock text-muted me-2"></i> Logout</a>

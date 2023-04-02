@@ -13,7 +13,7 @@ class FacultyController extends Controller
     public function index()
     {
         $faculties = Faculty::orderBy('created_at', 'desc')->get();
-        return view('admin.faculty.index', compact('faculties'));
+        return view('admin.faculty', compact('faculties'));
     }
 
     public function add()
@@ -24,7 +24,9 @@ class FacultyController extends Controller
     public function addSave(AddFacultyRequest $request)
     {
         $faculty = Faculty::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'active' => true,
+            'added_by' => auth()->user()->id
         ]);
 
         if($faculty != null)
@@ -47,7 +49,8 @@ class FacultyController extends Controller
 
         $updated = Faculty::where('id', $id)->update([
             'name' => $request->name,
-            'active' => $request->active
+            'active' => $request->active ? true : false,
+            'added_by' => auth()->user()->id
         ]);
 
         if($updated)
