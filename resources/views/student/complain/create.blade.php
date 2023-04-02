@@ -1,5 +1,13 @@
 @extends('layouts.app', ['title' => 'Make new Complain'])
 
+@section('css')
+    <style>
+        label, input, textarea, .box-title{
+            color: white !important;
+        }
+    </style>
+@endsection
+
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -35,7 +43,8 @@
                         <span class="text-info">Fill the following form below to make a complain.</span>
                     </div>
                     <!-- /.box-header -->
-                    <form class="form">
+                    <form class="form" method="POST" action="{{ route('student.complain.create.save') }}">
+                        @csrf
                         <div class="box-body">
                             <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> About Student</h4>
                             <hr class="my-15">
@@ -71,7 +80,7 @@
                             <hr class="my-15">
                             <div class="form-group">
                                 <label class="form-label">To Office</label>
-                                <select class="form-select">
+                                <select name="office_id" class="form-select">
                                     <option>Select Office</option>
                                     @foreach ($offices as $office)
                                         <option value="{{ $office->id }}">{{ $office->department->name }} - {{ $office->name }}</option>

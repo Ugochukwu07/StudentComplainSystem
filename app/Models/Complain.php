@@ -20,4 +20,13 @@ class Complain extends Model
     {
         return $this->hasOne(User::class, 'id', 'student_id');
     }
+    public function student()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'student_id');
+    }
+
+    public function office()
+    {
+        return $this->hasOne(Office::class, 'id', 'office_id');
+    }
 }
