@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Office;
+use App\Http\Controllers\Controller;
 
 class ComplainController extends Controller
 {
@@ -20,7 +21,8 @@ class ComplainController extends Controller
      */
     public function create()
     {
-        //
+        $offices = Office::all();
+        return view('student.complain.create', compact('offices'));
     }
 
     /**

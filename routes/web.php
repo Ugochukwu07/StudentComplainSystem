@@ -43,14 +43,15 @@ Route::prefix('student')->name('student.')->middleware('auth', 'student')->group
     Route::controller(ComplainController::class)->prefix('complain')->name('complain.')->group(function(){
         Route::get('/v/{type}', 'index')->name('index');
 
-        Route::get('/create', '')->name('create');
+        Route::get('/create', 'create')->name('create');
         Route::post('/create/save', 'store')->name('create.save');
     });
 });
 
 //Admins
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function(){
-    Route::controller(AdminMainController::class)->group(function(){
+    
+    Route::controller(AdminMainController::class)->name('main.')->prefix('main')->group(function(){
         Route::get('/', 'overview')->name('overview');
 
         Route::get('/profile', 'profile')->name('profile');
@@ -70,8 +71,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/delete/{id}', 'delete')->name('delete');
     });
 
+
+    Route::controller(OfficeController::class)->name('office.')->prefix('office')->group(function(){
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/add', 'add')->name('add');
+        Route::post('/add/save', 'addSave')->name('add.save');
+
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/edit/{id}/save', 'editSave')->name('edit.save');
+
+        Route::get('/delete/{id}/{soft}', 'delete')->name('delete');
+    });
+
     //Department Routes
-    Route::controller(DepartmentController::class)->group(function(){
+    Route::controller(DepartmentController::class)->name('department.')->prefix('department')->group(function(){
         Route::get('/', 'index')->name('index');
 
         Route::get('/add', 'add')->name('add');
@@ -84,7 +98,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     });
 
     //Faculty Routes
-    Route::controller(FacultyController::class)->group(function(){
+    Route::controller(FacultyController::class)->name('faculty.')->prefix('faculty')->group(function(){
         Route::get('/', 'index')->name('index');
 
         Route::get('/add', 'add')->name('add');

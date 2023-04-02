@@ -12,7 +12,7 @@ class Complain extends Model
     protected $fillable = [
         'title', 'complain', 'ref',
         'student_id', 'status', 'resolved_by',
-        'remarks'
+        'remarks', 'office_id'
     ];
 
 

@@ -289,11 +289,20 @@
 
                                 <div class="box p-10 no-shadow">
                                     <form class="form-horizontal form-element col-12" method="POST" action="{{ route('student.account.save', ['id' => Auth::user()->id]) }}">
+                                        @csrf
                                         <div class="form-group row">
-                                            @csrf
+                                            <label for="name" class="col-sm-2 form-label">Full Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" id="name" placeholder="Your Full Name">
+                                                @error('name')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="email" class="col-sm-2 form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="email" class="form-control" value="{{ $profile->email }}" id="email" placeholder="Your Email Address">
+                                                <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" id="email" placeholder="Your Email Address">
                                                 @error('email')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror

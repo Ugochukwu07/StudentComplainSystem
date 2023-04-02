@@ -92,7 +92,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $request->password], true)) {
             //when everything went right
             return auth()->user()->admin ?
-                    redirect()->route('admin.overview')->with('success', 'Logged In Successfully')
+                    redirect()->route('admin.main.overview')->with('success', 'Logged In Successfully')
                     :
                     redirect()->route('student.overview')->with('success', 'Logged In Successfully');
         }

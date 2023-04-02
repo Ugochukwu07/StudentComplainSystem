@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('users');
             $table->boolean('status')->default(0);
             $table->unsignedBigInteger('resolved_by');
+            $table->unsignedBigInteger('office_id');
             $table->text('remarks')->nullable();
             $table->timestamps();
         });
