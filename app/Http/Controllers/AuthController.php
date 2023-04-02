@@ -86,7 +86,7 @@ class AuthController extends Controller
             $profile = Profile::where('reg_number', $request->email_reg)->first();
             $email = $profile->user->email;
         } else {
-            return back()->withErrors('Invalid Email Address or Reg Number');
+            return back()->with('error', 'Invalid Email Address or Reg Number');
         }
 
         if (Auth::attempt(['email' => $email, 'password' => $request->password], true)) {
