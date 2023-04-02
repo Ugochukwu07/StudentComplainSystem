@@ -20,7 +20,7 @@
 <body id="email-body" style="color: black; background-color: #f5f5f5; font-family: 'Roboto', sans-serif; padding: 0px 10px; max-width: 700px; margin: auto; padding-top: 10px">
     <header style="padding: 10px 3px;">
         <center>
-            <a href="{{ route('home') }}">
+            <a href="{{ route('login') }}">
                 <h1>STUDENT COMPLAIN SYSYTEM</h1>
             </a>
         </center>

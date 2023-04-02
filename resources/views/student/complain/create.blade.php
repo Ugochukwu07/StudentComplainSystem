@@ -23,7 +23,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('student.overview') }}"><i
                                             class="mdi mdi-home-outline"></i></a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                <li class="breadcrumb-item active" aria-current="page">New Complain</li>
                             </ol>
                         </nav>
                     </div>
@@ -83,17 +83,27 @@
                                 <select name="office_id" class="form-select">
                                     <option>Select Office</option>
                                     @foreach ($offices as $office)
-                                        <option value="{{ $office->id }}">{{ $office->department->name }} - {{ $office->name }}</option>
+                                        <option {{ (old('office_id') == $office->id) ? 'selected' : '' }} value="{{ $office->id }}">{{ $office->department->name }} - {{ $office->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('office_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Title</label>
                                 <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="I wish to...">
+                                @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Complain</label>
                                 <textarea rows="10" name="complain" class="form-control" placeholder="Complain Text Here...">{{ old('complain') }}</textarea>
+
+                                @error('complain')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.box-body -->

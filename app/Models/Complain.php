@@ -20,9 +20,15 @@ class Complain extends Model
     {
         return $this->hasOne(User::class, 'id', 'student_id');
     }
+
     public function student()
     {
         return $this->hasOne(Profile::class, 'user_id', 'student_id');
+    }
+
+    public function resolvedBy()
+    {
+        return $this->hasOne(User::class, 'id', 'resolved_by');
     }
 
     public function office()

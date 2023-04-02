@@ -98,6 +98,18 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        $('#complains').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
     </script>
     @yield('js')
 

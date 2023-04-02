@@ -1,4 +1,4 @@
-@extends('layout.mail.app')
+@extends('layouts.mail.app')
 
 @section('content')
 <div style="margin: 1.5rem 0rem 2rem 0rem; background: white; margin-bottom: 20px; padding: 15px;">

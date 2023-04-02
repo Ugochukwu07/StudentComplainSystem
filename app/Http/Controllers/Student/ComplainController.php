@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use stdClass;
 use App\Models\Office;
 use App\Models\Complain;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class ComplainController extends Controller
             case 'pending':
                 $complains = $complain->where('status', 0)->get();
                 break;
-            case 'attended':
+            case 'completed':
                 $complains = $complain->where('status', 1)->get();
                 break;
 
@@ -34,7 +35,16 @@ class ComplainController extends Controller
                 break;
         }
 
-        return view('student.complain.index', compact('complains'));
+
+        $data = new stdClass;
+
+        $data->complain_count = Complain::where('student_id', auth()->user()->id)->count();
+        $data->complain_completed_count = Complain::where('student_id', auth()->user()->id)->where('status', 1)->count();
+        $data->complain_pending_count = Complain::where('student_id', auth()->user()->id)->where('status', 0)->count();
+
+        $offices = Office::all();
+
+        return view('student.complain.index', compact('complains', 'data', 'offices'));
 
     }
 
@@ -55,7 +65,7 @@ class ComplainController extends Controller
         $request->validate([
             'title' => 'required|string',
             'complain' => 'required|string',
-            'office_id' => 'required|numeric|exists:offices,id'
+            'office_id' => 'required|numeric|exists:offices,id',
         ]);
 
         $complain = Complain::create([
@@ -64,6 +74,7 @@ class ComplainController extends Controller
             'office_id' => $request->office_id,
             'student_id' => auth()->user()->id,
             'ref' => (new ComplainService())->assignRef(),
+            'resolved_by' => 0
         ]);
 
         Mail::to(auth()->user())->send(new NewComplainMail($complain));
@@ -76,7 +87,9 @@ class ComplainController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $offices = Office::all();
+        $complain = Complain::find($id);
+        return view('student.complain.view', compact('offices', 'complain'));
     }
 
     /**
@@ -92,7 +105,20 @@ class ComplainController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'complain' => 'required|string',
+            'office_id' => 'required|numeric|exists:offices,id'
+        ]);
+
+        $complain = Complain::where('id', $id)->update([
+            'title' => $request->title,
+            'complain' => $request->complain,
+            'office_id' => $request->office_id,
+            'student_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('student.complain.index', ['type', 'all'])->with('success', 'Complain Updated Successfully');
     }
 
     /**
@@ -100,6 +126,9 @@ class ComplainController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $complain = Complain::find($id);
+        $complain->delete();
+
+        return back()->with('success', 'Complain Deleted Successfully');
     }
 }

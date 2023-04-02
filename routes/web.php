@@ -46,6 +46,10 @@ Route::prefix('student')->name('student.')->middleware('auth', 'student')->group
 
         Route::get('/create', 'create')->name('create');
         Route::post('/create/save', 'store')->name('create.save');
+
+        Route::post('/update/save/{id}', 'update')->name('edit.save');
+
+        Route::get('/delete/{id}', 'destroy')->name('delete');
     });
 });
 
@@ -64,6 +68,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
         Route::get('/create', 'create')->name('create');
         Route::post('/create/save', 'store')->name('create.save');
+
+        Route::post('/update/save/{id}', 'update')->name('update.save');
+
+        Route::get('/delete/{id}', 'destroy')->name('delete');
     });
 
 

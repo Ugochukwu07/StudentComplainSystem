@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Student;
 
+use stdClass;
 use App\Models\User;
+use App\Models\Office;
+use App\Models\Faculty;
 use App\Models\Profile;
+use App\Models\Complain;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Student\MainService;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Student\ProfileUpdateRequest;
-use App\Models\Complain;
-use App\Models\Department;
-use App\Models\Faculty;
 use Illuminate\Http\RedirectResponse;
-use stdClass;
+use App\Http\Requests\Student\ProfileUpdateRequest;
 
 class MainController extends Controller
 {
@@ -30,7 +31,10 @@ class MainController extends Controller
         $data->complain_completed_count = Complain::where('student_id', auth()->user()->id)->where('status', 1)->count();
         $data->complain_pending_count = Complain::where('student_id', auth()->user()->id)->where('status', 0)->count();
 
-        return view('student.overview', compact('data'));
+        $complains = Complain::where('student_id', auth()->user()->id)->get();
+        $offices = Office::all();
+
+        return view('student.overview', compact('data', 'complains', 'offices'));
     }
 
 

@@ -40,6 +40,7 @@
                     {{-- <div class="fs-16"><i class="ion-arrow-graph-down-right text-white me-1"></i> %54 up</div> --}}
                   </div>
               </div>
+              @include('layouts.widget.complain')
           </div>
       </section>
       <!-- /.content -->

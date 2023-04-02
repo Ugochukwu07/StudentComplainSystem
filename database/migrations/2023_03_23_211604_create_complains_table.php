@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ref')->unique();
             $table->foreignId('student_id')->constrained('users');
             $table->boolean('status')->default(0);
-            $table->unsignedBigInteger('resolved_by');
+            $table->unsignedBigInteger('resolved_by')->nullable();
             $table->unsignedBigInteger('office_id');
             $table->text('remarks')->nullable();
             $table->timestamps();
