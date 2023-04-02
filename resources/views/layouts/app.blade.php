@@ -50,14 +50,14 @@
 	<script src="{{ asset('assets/vendor_components/Flot/jquery.flot.resize.js') }}"></script>
     @yield('vendor_js')
 
-    <script src="{{ asset('admin/vendor_components/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor_components/datatable/datatables.min.js') }}"></script>
 	<script src="{{ asset('js/pages/sampledata1.js') }}"></script>
 
 	<!-- Master Admin App -->
 	<script src="{{ asset('js/template.js') }}"></script>
 	<script src="{{ asset('js/pages/dashboard.js') }}"></script>
 
-    <script src="{{ asset('admin/js/pages/custom-scroll.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/custom-scroll.js') }}"></script>
 
     <script>
         $('#departments').DataTable({
@@ -67,6 +67,10 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
         $('#faculties').DataTable({
             'paging'      : true,
@@ -75,6 +79,10 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
         $('#offices').DataTable({
             'paging'      : true,
@@ -83,6 +91,10 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
     </script>
     @yield('js')
