@@ -8,6 +8,11 @@
             <p class="mb-0">Student Login</p>
         </div>
         <div class="p-40">
+            <div class="row">
+                @foreach ($errors->all() as $error)
+                    <div class="col-12 text-danger">{{ $error }}</div>
+                @endforeach
+            </div>
             <form action="{{ route('login.save') }}" method="post">
                 @csrf
                 <div class="form-group">

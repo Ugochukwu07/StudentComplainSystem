@@ -41,7 +41,7 @@ class AuthService{
             // 'address' => $data->address,
             // 'sex' => $data->sex,
             'faculty_id' => /*$department->faculty_id ??*/ 1,
-            'department_id' => /* $data->department_id ?? */ 1,
+            'department_id' => $data->department_id,
             'user_id' => $user_id,
             'level' => 100
         ]);
