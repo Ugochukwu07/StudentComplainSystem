@@ -7,11 +7,13 @@ use Illuminate\Http;
 use App\Models\Faculty;
 use App\Models\Profile;
 use App\Models\Session;
+use Illuminate\View\View;
 use App\Models\Department;
+use App\Mail\NewStudentMail;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Student\RegisterRequest;
 
 class AuthController extends Controller
@@ -42,6 +44,7 @@ class AuthController extends Controller
         $user = (new AuthService())->storeStudent($request);
 
         if (!$user)
+            Mail::to($user)->send(new NewStudentMail($user));
             return back()->with('error', 'Sorry, something went wrung');
 
         Auth::login($user);
