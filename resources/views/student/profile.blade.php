@@ -183,7 +183,7 @@
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="active tab-pane" id="settings">
+                            <div class="{{ $settings ? 'active' : '' }} tab-pane" id="settings">
 
                                 <div class="box p-10 no-shadow">
                                     <form class="form-horizontal form-element col-12" method="POST" action="{{ route('student.profile.save', ['id' => $profile->id]) }}">
@@ -202,7 +202,7 @@
                                             <label for="phone_number" class="col-sm-2 form-label">Phone Number</label>
 
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="phone_number" value="{{ old('phone_number') ?? $profile->phone_numer }}" placeholder="Input Your Phone Number">
+                                                <input type="text" class="form-control" name="phone_number" value="{{ old('phone_number') ?? $profile->phone_number }}" placeholder="Input Your Phone Number">
                                                 @error('phone_number')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -285,7 +285,7 @@
                                 </div>
                             </div>
                             <!-- /.tab-pane -->
-                            <div class="active tab-pane" id="account">
+                            <div class="{{ $account ? 'active' : '' }} tab-pane" id="account">
 
                                 <div class="box p-10 no-shadow">
                                     <form class="form-horizontal form-element col-12" method="POST" action="{{ route('student.account.save', ['id' => Auth::user()->id]) }}">
@@ -401,8 +401,8 @@
                                     <div>
                                         <div class="map-box">
                                             <iframe
-                                                src="https://maps.google.com/?q={{ urlencode($profile->address) }}"
-                                                width="100%" height="100" frameborder="0" style="border:0"
+                                                src="https://google.com/maps?q={{ urlencode($profile->address) }}&output=embed"
+                                                width="100%" height="200" frameborder="0" style="border:0"
                                                 allowfullscreen></iframe>
                                         </div>
                                     </div>

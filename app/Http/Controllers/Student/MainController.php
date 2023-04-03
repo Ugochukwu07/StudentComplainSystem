@@ -103,7 +103,7 @@ class MainController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|confirmed',
-            'password_confirmation' => 'require|string',
+            'password_confirmation' => 'required_with:password|string',
         ]);
 
         $user = User::where('id', $id)->update([

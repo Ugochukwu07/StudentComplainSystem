@@ -11,7 +11,7 @@ class MainService{
             'phone_number' => $data->phone_number,
             'address' => $data->address,
             'sex' => $data->sex,
-            // 'faculty_id' => $data->faculty_id,
+            'level' => $data->level,
             // 'department_id' => $data->department_id,
             'user_id' => $user_id,
         ]);
