@@ -75,9 +75,10 @@
                 </div>
             </div>
 
+            @include('layouts.widget.complain')
+            @include('layouts.admin.office')
+            @include('layouts.admin.department')
              @include('layouts.admin.faculty')
-             @include('layouts.admin.department')
-             @include('layouts.admin.office')
           </div>
       </section>
       <!-- /.content -->

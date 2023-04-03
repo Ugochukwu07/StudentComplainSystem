@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Student\ComplainController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Admin\ComplainController as AdminComplainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,11 +64,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::post('/profile/save', 'profileSave')->name('profile.save');
     });
 
-    Route::controller(ComplainController::class)->prefix('complain')->name('complain.')->group(function(){
+    Route::controller(AdminComplainController::class)->prefix('complain')->name('complain.')->group(function(){
         Route::get('/v/{type}', 'index')->name('index');
 
         Route::get('/create', 'create')->name('create');
         Route::post('/create/save', 'store')->name('create.save');
+
+        Route::get('/attend/{id}', 'attend')->name('attend');
+        Route::post('/attend/{id}/save', 'store')->name('attend.save');
 
         Route::post('/update/save/{id}', 'update')->name('update.save');
 

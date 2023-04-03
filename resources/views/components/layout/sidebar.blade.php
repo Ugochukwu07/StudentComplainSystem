@@ -64,6 +64,29 @@
                             <li><a href="{{ route('admin.office.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>All</a></li>
                         </ul>
                     </li>
+
+                    <li class="header">Complains</li>
+
+                    <li>
+                        <a href="{{ route('admin.complain.index', ['type' => 'all']) }}">
+                            <img src="{{ asset('images/svg-icon/layouts.svg') }}" class="svg-icon" alt="">
+                            <span>All Complains</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <img src="{{ asset('images/svg-icon/tables.svg') }}" class="svg-icon" alt="">
+                            <span>View</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('admin.complain.index', ['type' => 'all']) }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>All</a></li>
+                            <li><a href="{{ route('admin.complain.index', ['type' => 'pending']) }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pending</a></li>
+                            <li><a href="{{ route('admin.complain.index', ['type' => 'completed']) }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Completed</a></li>
+                        </ul>
+                    </li>
                 @else
                     <li class="treeview">
                         <a href="#">
@@ -120,124 +143,126 @@
     </section>
   </aside>
 
-<!-- Modal -->
-<div class="modal center-modal fade" id="modal-add-faculty" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="row">
-                @foreach ($errors->all() as $error)
-                    <div class="col-12 text-danger">{{ $error }}</div>
-                @endforeach
-            </div>
-            <form action="{{ route('admin.faculty.add.save') }}" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Faculty</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+@if(Auth::user()->admin)
+    <!-- Modal -->
+    <div class="modal center-modal fade" id="modal-add-faculty" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row">
+                    @foreach ($errors->all() as $error)
+                        <div class="col-12 text-danger">{{ $error }}</div>
+                    @endforeach
                 </div>
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Faculty Name</label>
-                        <div class="col-md-12">
-                            <input class="form-control" value="{{ old('name') }}" type="text" name="name">
+                <form action="{{ route('admin.faculty.add.save') }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Faculty</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Faculty Name</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('name') }}" type="text" name="name">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer" style="width: 100%;">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary float-end">Add</button>
-                </div>
-            </form>
+                    <div class="modal-footer" style="width: 100%;">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end">Add</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<!-- Modal -->
-<div class="modal center-modal fade" id="modal-add-department" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="row">
-                @foreach ($errors->all() as $error)
-                    <div class="col-12 text-danger">{{ $error }}</div>
-                @endforeach
+    <!-- Modal -->
+    <div class="modal center-modal fade" id="modal-add-department" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row">
+                    @foreach ($errors->all() as $error)
+                        <div class="col-12 text-danger">{{ $error }}</div>
+                    @endforeach
+                </div>
+                <form action="{{ route('admin.department.add.save') }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Faculty</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Faculty</label>
+                            <div class="col-md-12">
+                                <select name="faculty_id" class="form-select">
+                                    <option>Select Faculty</option>
+                                    @foreach ($faculties as $faculty)
+                                        <option {{ (old('faculty_id') == $faculty->id) ? 'selected' : '' }} value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Department Name</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('name') }}" type="text" name="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="width: 100%;">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end">Add</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('admin.department.add.save') }}" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Faculty</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Faculty</label>
-                        <div class="col-md-12">
-                            <select name="faculty_id" class="form-select">
-                                <option>Select Faculty</option>
-                                @foreach ($faculties as $faculty)
-                                    <option {{ (old('faculty_id') == $faculty->id) ? 'selected' : '' }} value="{{ $faculty->id }}">{{ $faculty->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Department Name</label>
-                        <div class="col-md-12">
-                            <input class="form-control" value="{{ old('name') }}" type="text" name="name">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer" style="width: 100%;">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary float-end">Add</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
-<!-- Modal -->
-<div class="modal center-modal fade" id="modal-add-offices" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="row">
-                @foreach ($errors->all() as $error)
-                    <div class="col-12 text-danger">{{ $error }}</div>
-                @endforeach
+    <!-- Modal -->
+    <div class="modal center-modal fade" id="modal-add-offices" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row">
+                    @foreach ($errors->all() as $error)
+                        <div class="col-12 text-danger">{{ $error }}</div>
+                    @endforeach
+                </div>
+                <form action="{{ route('admin.office.add.save') }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Office</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Department</label>
+                            <div class="col-md-12">
+                                <select name="department_id" class="form-select">
+                                    <option>Select Department</option>
+                                    @foreach ($departments as $department)
+                                        <option {{ (old('department_id') == $department->id) ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Offices Name</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('name') }}" type="text" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Address</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('address') }}" type="text" name="address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="width: 100%;">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end">Add</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('admin.office.add.save') }}" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Office</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Department</label>
-                        <div class="col-md-12">
-                            <select name="department_id" class="form-select">
-                                <option>Select Department</option>
-                                @foreach ($departments as $department)
-                                    <option {{ (old('department_id') == $department->id) ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Offices Name</label>
-                        <div class="col-md-12">
-                            <input class="form-control" value="{{ old('name') }}" type="text" name="name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-12">Address</label>
-                        <div class="col-md-12">
-                            <input class="form-control" value="{{ old('address') }}" type="text" name="address">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer" style="width: 100%;">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary float-end">Add</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
+@endif
