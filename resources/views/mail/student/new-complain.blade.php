@@ -12,6 +12,14 @@
         <table>
             <tr>
                 <td align="center">
+                    <p><b>Reffrence</b></p>
+                </td>
+                <td>
+                    <p style="margin-left: 9px">{{ $complain->ref }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
                     <p><b>Subject</b></p>
                 </td>
                 <td>

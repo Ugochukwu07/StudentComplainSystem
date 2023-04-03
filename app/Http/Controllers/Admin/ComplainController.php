@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use stdClass;
+use App\Models\User;
 use App\Models\Office;
 use App\Models\Complain;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Admin\Complain\AttendMail;
 
 class ComplainController extends Controller
 {
@@ -46,6 +49,29 @@ class ComplainController extends Controller
             'complain' => Complain::find($id),
             'offices' => Office::all()
         ]);
+    }
+
+    public function attendSave(Request $request, $id)
+    {
+        $request->validate([
+            'remarks' => 'required|string'
+        ]);
+
+        $complain = Complain::where('id', $id)->update([
+            'remarks' => $request->remarks,
+            'resolved_by' => auth()->user()->id,
+            'status' => true
+        ]);
+
+        if(!$complain)
+            return back()->with('error', 'Something went wrong while updating remarks');
+
+
+        $student = User::find($request->student_id);
+
+        Mail::to($student)->send(new AttendMail(Complain::find($id), $student));
+
+        return redirect()->route('admin.complain.index', ['type' => 'attended'])->with('success', 'Complain Attended Successfully');
     }
 
     public function student($student_id, $type)

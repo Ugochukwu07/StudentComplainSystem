@@ -71,7 +71,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::post('/create/save', 'store')->name('create.save');
 
         Route::get('/attend/{id}', 'attend')->name('attend');
-        Route::post('/attend/{id}/save', 'store')->name('attend.save');
+        Route::post('/attend/{id}/save', 'attendSave')->name('attend.save');
 
         Route::post('/update/save/{id}', 'update')->name('update.save');
 

@@ -45,6 +45,7 @@
                     <!-- /.box-header -->
                     <form class="form" method="POST" action="{{ route('admin.complain.attend.save', ['id' => $complain->id]) }}">
                         @csrf
+                        <input type="hidden" value="{{ $complain->student_id }}" name="student_id" id="student_id">
                         <div class="box-body">
                             <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> About Student</h4>
                             <hr class="my-15">
@@ -80,7 +81,7 @@
                             <hr class="my-15">
                             <div class="form-group">
                                 <label class="form-label">To Office</label>
-                                <select @readonly(true) name="office_id" class="form-select">
+                                <select readonly name="office_id" class="form-select">
                                     <option>Select Office</option>
                                     @foreach ($offices as $office)
                                         <option {{ ($complain->office_id == $office->id) ? 'selected' : '' }} value="{{ $office->id }}">{{ $office->department->name }} - {{ $office->name }}</option>
