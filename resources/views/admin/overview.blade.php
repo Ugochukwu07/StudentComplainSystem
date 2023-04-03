@@ -75,10 +75,13 @@
                 </div>
             </div>
 
+            <x-Admin.Student.Overview-Component />
+
             @include('layouts.widget.complain')
+            @include('layouts.admin.student')
             @include('layouts.admin.office')
             @include('layouts.admin.department')
-             @include('layouts.admin.faculty')
+            @include('layouts.admin.faculty')
           </div>
       </section>
       <!-- /.content -->
