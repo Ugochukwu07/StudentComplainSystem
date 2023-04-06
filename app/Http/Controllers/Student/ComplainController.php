@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Student;
 
 use stdClass;
+use App\Models\User;
 use App\Models\Office;
 use App\Models\Complain;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Student\NewComplainMail;
+use App\Service\SMSService;
 use App\Service\Student\ComplainService;
 
 class ComplainController extends Controller
@@ -77,7 +79,13 @@ class ComplainController extends Controller
             'resolved_by' => 0
         ]);
 
-        Mail::to(auth()->user())->send(new NewComplainMail($complain));
+        $user = User::find(auth()->user()->id);
+        Mail::to($user)->send(new NewComplainMail($complain));
+
+        if(!empty($user->profile->phone_number)){
+            // (new SMSService())->sendSMS($user->profile->phone_number, 'We have received Your Complain. Ref:' . $complain->ref);
+            (new SMSService())->sendSMSTermil($user->profile->phone_number, 'We have received Your Complain. Ref:' . $complain->ref);
+        }
 
         return redirect()->route('student.complain.index', ['type', 'all'])->with('success', 'Complain Made Successfully');
     }
