@@ -44,7 +44,7 @@ class SMSService {
         $response = curl_exec($curl);
 
         curl_close($curl);
-        dd($response);
+        // dd($response);
         return $response;
     }
     public function sendSMS($phone_number, $message)
