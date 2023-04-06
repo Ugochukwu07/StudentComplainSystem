@@ -57,6 +57,10 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+		"prepend-autoloader": false,
+		"platform": {
+			"php": "8.0.13"
+		},
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
