@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function registerSave(RegisterRequest $request)
     {
         $user = (new AuthService())->storeStudent($request);
-
+dd($user);
         if (!$user)
             return back()->with('error', 'Sorry, something went wrung while registering student');
 
