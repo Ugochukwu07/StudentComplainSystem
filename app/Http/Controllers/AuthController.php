@@ -47,12 +47,11 @@ class AuthController extends Controller
             return back()->with('error', 'Sorry, something went wrung while registering student');
 
         Mail::to($user)->send(new NewStudentMail($user));
-        Auth::login($user);
 
         $profile = (new AuthService())->storeProfile($request, $user->id);
         if (!$profile)
             return redirect()->route('student.profile')->with('error', 'Sorry, something went wrung while creating profile');
-
+        Auth::login($user);
 
         //when everything went right
         return redirect()->route('student.overview')->with('success', 'Account Created Successfully');
