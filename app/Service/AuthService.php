@@ -46,8 +46,6 @@ class AuthService{
             'level' => 100
         ]);
 
-did($profile);
-
         return $profile;
     }
 }
