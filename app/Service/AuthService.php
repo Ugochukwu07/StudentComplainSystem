@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\Profile;
 use App\Models\User;
@@ -34,16 +35,16 @@ class AuthService{
      */
     public function storeProfile($data, $user_id): Profile
     {
-        // $department = Faculty::find($data->department_id);
+        $department = Department::find($data->department_id);
         $profile = Profile::create([
             'reg_number' => $data->reg_number,
-            // 'phone_number' => $data->phone_number,
+            'phone_number' => $data->phone_number,
             // 'address' => $data->address,
             // 'sex' => $data->sex,
-            'faculty_id' => /*$department->faculty_id ??*/ 1,
+            'faculty_id' => $department->faculty_id,
             'department_id' => $data->department_id,
             'user_id' => $user_id,
-            'level' => 100
+            'level' => $data->level
         ]);
 
         return $profile;

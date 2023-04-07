@@ -18,6 +18,6 @@ class IsAdminMiddleware
         if(auth()->user()->admin)
             return $next($request);
 
-        return back()->with('error', 'You\'re not allowed to view this page');
+        return redirect()->route('student.overview')->with('error', 'You\'re not allowed to view this page');
     }
 }

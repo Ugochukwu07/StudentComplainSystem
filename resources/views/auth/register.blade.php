@@ -40,15 +40,37 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-more"></i></span>
+                        <input value="{{ old('phone_number') }}" type="text" class="form-control ps-15 bg-transparent" name="phone_number" placeholder="Reg Number">
+                    </div>
+                    @error('phone_number')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-transparent"><i class="ti-more"></i></span>
                         <select class="form-select-mg bg-transparent form-control" name="department_id" id="department_id">
                             <option>Select Your Department</option>
                             @foreach ($departments as $department)
                                 <option {{ $department->id == old('department_id') ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
                             @endforeach
                         </select>
-                        {{-- <input type="text" class="form-control ps-15 bg-transparent" name="reg_number" placeholder="Reg Number"> --}}
                     </div>
                     @error('department_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-transparent"><i class="ti-more"></i></span>
+                        <select class="form-select-mg bg-transparent form-control" name="level" id="level">
+                            <option>Select Your Level</option>
+                            @foreach ($levels as $level)
+                                <option @if(old('level') == $level) selected @endif value="{{ $level }}">{{ $level }} Level</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('level')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
