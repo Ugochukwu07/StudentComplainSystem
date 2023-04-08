@@ -6,6 +6,7 @@ use stdClass;
 use App\Models\User;
 use App\Models\Office;
 use App\Models\Complain;
+use App\Service\SMSService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -70,6 +71,8 @@ class ComplainController extends Controller
         $student = User::find($request->student_id);
 
         Mail::to($student)->send(new AttendMail(Complain::find($id), $student));
+
+        (new SMSService())->sendSMSTermil($student->profile->phone_number, 'Your Complain about ' . $complain->title . ' has been resolved. Remarks: ' . $complain->remarks);
 
         return redirect()->route('admin.complain.index', ['type' => 'attended'])->with('success', 'Complain Attended Successfully');
     }

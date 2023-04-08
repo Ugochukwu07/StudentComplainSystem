@@ -70,10 +70,13 @@
                                 </div>
                                 </div>
                                 <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Contact Number</label>
-                                    <input type="text" readonly value="{{ Auth::user()->profile->phone_number }}" class="form-control" placeholder="Phone">
-                                </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Contact Number</label>
+                                        <input type="text" name="phone_number" value="{{ Auth::user()->profile->phone_number }}" class="form-control" placeholder="Phone">
+                                        @error('phone_number')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                             <h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Complains</h4>
