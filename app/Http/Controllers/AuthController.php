@@ -28,8 +28,9 @@ class AuthController extends Controller
         // $sessions = Session::all();
         $faculties = Faculty::all();
         $departments = Department::all();
+        $levels = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-        return view('auth.register', compact('faculties', 'departments'));
+        return view('auth.register', compact('faculties', 'departments', 'levels'));
     }
 
 
@@ -46,7 +47,7 @@ class AuthController extends Controller
         if ($user == NULL){
             return back()->with('error', 'Sorry, something went wrung while registering student');
         }
-        
+
         $profile = (new AuthService())->storeProfile($request, $user->id);
         if ($profile == NULL)
             return redirect()->route('student.profile')->with('error', 'Sorry, something went wrung while creating profile');

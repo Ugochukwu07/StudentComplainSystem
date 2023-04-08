@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Auth;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewStudentMail extends Mailable
+class ForgetPasswordRequestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct(public String $token, public User $user)
     {
         //
     }
@@ -29,8 +28,7 @@ class NewStudentMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('support@studentcomplainsystem.nau.com', 'Student Complain System'),
-            subject: 'Welcome to ' . config('app.name'),
+            subject: 'Request for Password Reset',
         );
     }
 
@@ -40,7 +38,7 @@ class NewStudentMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.new-student',
+            view: 'mail.auth.password',
         );
     }
 
