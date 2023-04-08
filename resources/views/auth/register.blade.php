@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-more"></i></span>
-                        <input value="{{ old('phone_number') }}" type="text" class="form-control ps-15 bg-transparent" name="phone_number" placeholder="Reg Number">
+                        <input value="{{ old('phone_number') }}" type="text" class="form-control ps-15 bg-transparent" name="phone_number" placeholder="Phone Number">
                     </div>
                     @error('phone_number')
                         <span class="text-danger">{{ $message }}</span>
