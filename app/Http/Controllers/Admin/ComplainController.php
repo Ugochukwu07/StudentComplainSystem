@@ -68,6 +68,7 @@ class ComplainController extends Controller
             return back()->with('error', 'Something went wrong while updating remarks');
 
 
+        $complain = Complain::find($id);
         $student = User::find($request->student_id);
 
         Mail::to($student)->send(new AttendMail(Complain::find($id), $student));
