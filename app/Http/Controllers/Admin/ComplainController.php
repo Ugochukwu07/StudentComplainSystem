@@ -108,4 +108,11 @@ class ComplainController extends Controller
         return view('admin.complain.index', compact('complains', 'data', 'offices'));
 
     }
+    public function destroy($id)
+    {
+        $complain = Complain::find($id);
+
+        $complain->delete();
+        return back()->with('success', 'Complain Deleted Successfully');
+    }
 }

@@ -62,12 +62,13 @@ class FacultyController extends Controller
     public function delete($id, $soft = true)
     {
         $faculty = Faculty::find($id);
-        if($soft)
+        // if($soft){
             $faculty->active = true;
             $faculty->save();
             return back()->with('success', 'Faculty Deactivated Successfully');
+        // }
 
-        $faculty->delete();
-        return back()->with('success', 'Faculty Deleted Successfully');
+        // $faculty->delete();
+        // return back()->with('success', 'Faculty Deleted Successfully');
     }
 }

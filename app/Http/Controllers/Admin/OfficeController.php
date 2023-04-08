@@ -83,12 +83,12 @@ class OfficeController extends Controller
     public function delete($id, $soft = true)
     {
         $office = Office::find($id);
-        if($soft)
+        // if($soft)
             $office->active = true;
             $office->save();
             return back()->with('success', 'Office Deactivated Successfully');
 
-        $office->delete();
-        return back()->with('success', 'Office Deleted Successfully');
+        // $office->delete();
+        // return back()->with('success', 'Office Deleted Successfully');
     }
 }

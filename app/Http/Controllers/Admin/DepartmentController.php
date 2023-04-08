@@ -70,12 +70,13 @@ class DepartmentController extends Controller
     public function delete($id, $soft = true)
     {
         $department = Department::find($id);
-        if($soft)
+        // if($soft){
             $department->active = true;
             $department->save();
             return back()->with('success', 'Department Deactivated Successfully');
+        // }
 
-        $department->delete();
-        return back()->with('success', 'Department Deleted Successfully');
+        // $department->delete();
+        // return back()->with('success', 'Department Deleted Successfully');
     }
 }
