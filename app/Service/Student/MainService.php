@@ -21,7 +21,7 @@ class MainService{
             $file_location = User::select('image')->where('id', auth()->user()->id)->first()->image;
         }
 
-        User::where('id', $id)->update(['image' => $file_location]);
+        User::where('id', $user_id)->update(['image' => $file_location]);
 
         $profile = Profile::where('id', $id)->update([
             'reg_number' => $data->reg_number,
