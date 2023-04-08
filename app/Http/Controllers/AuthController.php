@@ -94,6 +94,12 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt(['email' => $email, 'password' => $request->password], true)) {
+
+            if(empty(auth()->user()->image)){
+                $user = User::find(auth()->user()->id);
+                $user->image = 'images/user3-128x128.jpg';
+                $user->save();
+            }
             //when everything went right
             return auth()->user()->admin ?
                     redirect()->route('admin.main.overview')->with('success', 'Logged In Successfully')
@@ -101,7 +107,7 @@ class AuthController extends Controller
                     redirect()->route('student.overview')->with('success', 'Logged In Successfully');
         }
 
-        return back()->with('failed', 'Login details do not match');
+        return back()->with('error', 'Login details do not match');
     }
 
     public function logout(){

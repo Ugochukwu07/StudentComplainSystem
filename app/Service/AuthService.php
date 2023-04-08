@@ -20,7 +20,8 @@ class AuthService{
             'name' => $data->name,
             'email' => $data->email,
             'admin' => false,
-            'password' => Hash::make($data->password)
+            'password' => Hash::make($data->password),
+            'image' => 'images/user3-128x128.jpg'
         ]);
 
         return $user;

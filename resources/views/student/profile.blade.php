@@ -186,14 +186,24 @@
                             <div class="{{ $settings ? 'active' : '' }} tab-pane" id="settings">
 
                                 <div class="box p-10 no-shadow">
-                                    <form class="form-horizontal form-element col-12" method="POST" action="{{ route('student.profile.save', ['id' => $profile->id]) }}">
+                                    <form class="form-horizontal form-element col-12" enctype="multipart/form-data" method="POST" action="{{ route('student.profile.save', ['id' => $profile->id]) }}">
+                                        @csrf
                                         <div class="form-group row">
-                                            @csrf
                                             <label for="reg_number" class="col-sm-2 form-label">Reg Number</label>
-
                                             <div class="col-sm-10">
                                                 <input type="text" name="reg_number" class="form-control" value="{{ $profile->reg_number }}" id="reg_number" placeholder="Your Reg Number">
                                                 @error('reg_number')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <div class="mb-3">
+                                                    <label for="image" class="form-label">Profile Image</label>
+                                                    <input class="form-control" type="file" name="image" id="image">
+                                                </div>
+                                                @error('image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -354,7 +364,7 @@
                             <h6 class="widget-user-desc text-white">Student</h6>
                         </div>
                         <div class="widget-user-image">
-                            <img class="rounded-circle" src="{{ asset('images/user3-128x128.jpg') }}" alt="User Avatar">
+                            <img class="rounded-circle" src="{{ asset(Auth::user()->image) }}" alt="User Avatar">
                         </div>
                         <div class="box-footer">
                             <div class="row">
