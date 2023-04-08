@@ -89,7 +89,7 @@ class ComplainController extends Controller
         Mail::to($user)->send(new NewComplainMail($complain));
         if(!empty($user->profile->phone_number)){
             // (new SMSService())->sendSMS($user->profile->phone_number, 'We have received Your Complain. Ref:' . $complain->ref);
-            (new SMSService())->sendSMSTermil($user->profile->phone_number, 'We have received Your Complain. Ref:' . $complain->ref);
+            (new SMSService())->sendSMSTermil($user->profile->phone_number, 'We have received your complain of ' . $complain->title . '. Ref: #' . $complain->ref);
         }
 
         return redirect()->route('student.complain.index', ['type', 'all'])->with('success', 'Complain Made Successfully');
