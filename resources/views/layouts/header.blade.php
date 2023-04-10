@@ -3,14 +3,25 @@
 		<!-- Logo -->
 		<a href="{{ Auth::user()->admin ? route('admin.main.overview') : route('student.overview') }}" class="logo">
 		  <!-- logo-->
-		  <div class="logo-mini w-30">
-			  <span class="light-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
-			  <span class="dark-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
-		  </div>
-		  <div class="logo-lg">
-			  <span class="light-logo"><img src="{{ asset('images/logo-dark-text.png') }}" alt="logo"></span>
-			  <span class="dark-logo"><img src="{{ asset('images/logo-light-text.png') }}" alt="logo"></span>
-		  </div>
+          @if(Auth::user()->admin)
+            <div class="logo-mini w-30">
+                <span class="light-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
+                <span class="dark-logo"><img src="{{ asset('images/logo-letter.png') }}" alt="logo"></span>
+            </div>
+            <div class="logo-lg">
+                <span class="light-logo"><img src="{{ asset('images/logo-dark-text.png') }}" alt="logo"></span>
+                <span class="dark-logo"><img src="{{ asset('images/logo-light-text.png') }}" alt="logo"></span>
+            </div>
+          @else
+            <div class="logo-mini w-30">
+                {{-- <span class="light-logo">Student Complain System</span> --}}
+                <span class="dark-logo">Student Complain System</span>
+            </div>
+            <div class="logo-lg">
+                {{-- <span class="light-logo">Student Complain System</span> --}}
+                <span class="dark-logo">Student Complain System</span>
+            </div>
+          @endif
 		</a>
 	</div>
     <!-- Header Navbar -->
@@ -36,8 +47,11 @@
 
 	      <!-- User Account-->
           <li class="dropdown user user-menu">
-            <a href="#" class="waves-effect waves-light dropdown-toggle btn-outline no-border" data-bs-toggle="dropdown" title="User">
+            <a href="#" class="waves-effect position-relative waves-light dropdown-toggle btn-outline no-border" data-bs-toggle="dropdown" title="User">
 				<img src="{{ asset('images/svg-icon/user.svg') }}" class="img-fluid svg-icon" alt="">
+                <div class="position-absolute blink" style="top: -10%; left: 10%">
+                    <i class=" wi wi-moon-alt-new text-success" style="font-size: 14px;"></i>
+                </div>
             </a>
             <ul class="dropdown-menu animated flipInX">
               <li class="user-body">

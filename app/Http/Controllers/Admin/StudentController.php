@@ -71,6 +71,15 @@ class StudentController extends Controller
 
 
         //when everything went right
-        return redirect()->route('admin.student.all')->with('success', 'Account Created Successfully');
+        return redirect()->route('admin.student.all')->with('success', 'Student Account Updated Successfully');
+    }
+
+
+    public function delete($id)
+    {
+        $admin = User::find($id);
+        $admin->delete();
+
+        return redirect()->route('admin.student.all')->with('success', 'Student Account Deleted Successfully');
     }
 }

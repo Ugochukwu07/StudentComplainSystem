@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\OfficeController;
@@ -80,6 +81,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
 
     Route::controller(StudentController::class)->name('student.')->prefix('student')->group(function(){
+        Route::get('/', 'all')->name('all');
+
+        Route::get('/add', 'add')->name('add');
+        Route::post('/add/save', 'addSave')->name('add.save');
+
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/edit/save/{id}', 'editSave')->name('edit.save');
+
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(AdminController::class)->name('admin.')->prefix('admin')->group(function(){
         Route::get('/', 'all')->name('all');
 
         Route::get('/add', 'add')->name('add');

@@ -102,6 +102,20 @@
                             Add Student
                         </a>
                     </li>
+                    <li class="header">Admins</li>
+
+                    <li>
+                        <a href="{{ route('admin.admin.all') }}">
+                            <img src="{{ asset('images/svg-icon/layouts.svg') }}" class="svg-icon" alt="">
+                            <span>All Admins</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!" data-bs-toggle="modal" data-bs-target="#modal-add-admin">
+                            <img src="{{ asset('images/svg-icon/layouts.svg') }}" class="svg-icon" alt="">
+                            Add Admin
+                        </a>
+                    </li>
 
                 @else
                     <li class="treeview">
@@ -276,6 +290,55 @@
                             <label class="col-form-label col-md-12">Student Mail*</label>
                             <div class="col-md-12">
                                 <input class="form-control" value="{{ old('email') }}" placeholder="student@nau.com" type="email" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Passsword*</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('password') }}" type="password" placeholder="201754289" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Password Confirmation</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('password_confirmation') }}" placeholder="201754289" type="password" name="password_confirmation">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer modal-footer-uniform" style="width: 100%;">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal center-modal fade" data-backdrop="static" data-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true" id="modal-add-admin" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content" style="overflow-y: scroll">
+                <div class="row">
+                    @foreach ($errors->all() as $error)
+                        <div class="col-12 text-danger">{{ $error }}</div>
+                    @endforeach
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Add an Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin.admin.add.save') }}" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">Full Name*</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('name') }}" placeholder="John Doe" type="text" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-12">EMail*</label>
+                            <div class="col-md-12">
+                                <input class="form-control" value="{{ old('email') }}" placeholder="admin@nau.com" type="email" name="email">
                             </div>
                         </div>
                         <div class="form-group row">

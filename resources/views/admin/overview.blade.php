@@ -77,6 +77,8 @@
 
             <x-Admin.Student.Overview-Component />
 
+            <x-Admin.Admin.Overview-Component />
+
             @include('layouts.widget.complain')
             @include('layouts.admin.student')
             @include('layouts.admin.office')

@@ -15,10 +15,47 @@
 	<link rel="stylesheet" href="{{ asset('css/vendors_css.css') }}">
 
 	<!-- Style-->
+    <style>
+        @import url({{ asset('color_theme.css') }});
+        @import url({{ asset('style_rtl.css') }});
+        @import url({{ asset('assets/icons/font-awesome/css/font-awesome.css') }});
+        @import url({{ asset('assets/icons/Ionicons/css/ionicons.css') }});
+        @import url({{ asset('assets/icons/themify-icons/themify-icons.css') }});
+        @import url({{ asset('assets/icons/linea-icons/linea.css') }});
+        @import url({{ asset('assets/icons/glyphicons/glyphicon.css') }});
+        @import url({{ asset('assets/icons/flag-icon-css/css/flag-icon.css') }});
+        @import url({{ asset('assets/icons/material-design-iconic-font/css/materialdesignicons.css') }});
+        @import url({{ asset('assets/icons/simple-line-icons/css/simple-line-icons.css') }});
+        @import url({{ asset('assets/icons/cryptocoins-master/cryptocoins.css') }});
+        @import url({{ asset('assets/icons/weather-icons/css/weather-icons.min.css') }});
+        @import url({{ asset('assets/icons/iconsmind/style.css') }});
+        @import url({{ asset('assets/icons/icomoon/style.css') }});
+        @import url({{ asset('assets/vendor_components/animate/animate.css') }});
+    </style>
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/skin_color.css') }}">
 
     @yield('css')
+
+    <style>
+        .fs-30{
+            color: white !important;
+        }
+       .blink {
+        animation: blink .8s linear infinite;
+      }
+      @keyframes blink {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: .5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
 
   </head>
 
