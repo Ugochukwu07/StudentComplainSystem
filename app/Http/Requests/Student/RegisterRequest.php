@@ -28,6 +28,8 @@ class RegisterRequest extends FormRequest
             'department_id' => 'nullable|numeric|exists:departments,id',
             'password' => 'required|string|confirmed',
             'password_confirmation' => 'required|string',
+            'sex' => 'required|string',
+            'country' => 'required|string'
         ];
     }
 }

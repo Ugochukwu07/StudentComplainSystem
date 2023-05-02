@@ -29,7 +29,7 @@ class MainService{
             'address' => $data->address,
             'sex' => $data->sex,
             'level' => $data->level,
-            // 'department_id' => $data->department_id,
+            'country' => $data->country,
             'user_id' => $user_id,
         ]);
 

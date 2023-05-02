@@ -229,6 +229,16 @@
                                             @enderror
                                         </div>
                                         <div class="form-group row">
+                                            <label for="country" class="col-sm-2 form-label">Country</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="text" value="{{ old('country') ?? $profile->country }}" class="form-control" name="country" placeholder="Type your Country">
+                                            </div>
+                                            @error('country')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="sex" class="col-sm-2 form-label">Sex</label>
 
                                             <div class="col-sm-10">
@@ -356,10 +366,11 @@
                 <!-- /.col -->
 
                 <div class="col-12 col-lg-5 col-xl-4">
-                    <div class="box box-widget widget-user">
+                    <div class="box box-widget widget-user" >
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-img bbsr-0 bber-0"
-                            style="background: url('{{ asset('images/gallery/full/10.jpg') }}') center center;" data-overlay="5">
+                            style="background: url('{{ asset(Auth::user()->image) }}') center center;" data-overlay="5">
+                            {{-- style="background: url('{{ asset('images/gallery/full/10.jpg') }}') center center;" data-overlay="5"> --}}
                             <h3 class="widget-user-username text-white">{{ Auth::user()->name }}</h3>
                             <h6 class="widget-user-desc text-white">Student</h6>
                         </div>
@@ -404,6 +415,7 @@
                                         <p>Email :<span class="text-gray ps-10">{{ Auth::user()->email }}</span> </p>
                                         <p>Phone :<span class="text-gray ps-10">{{ $profile->phone_number }}</span></p>
                                         <p>Address :<span class="text-gray ps-10">{{ $profile->address }}</span>
+                                        <p>Country :<span class="text-gray ps-10">{{ $profile->country }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -411,9 +423,10 @@
                                     <div>
                                         <div class="map-box">
                                             <iframe
-                                                src="https://google.com/maps?q={{ urlencode($profile->address) }}&output=embed"
+                                                src="https://google.com/maps?q={{ urlencode($profile->address . ' ' . $profile->country) }}&output=embed"
                                                 width="100%" height="200" frameborder="0" style="border:0"
-                                                allowfullscreen></iframe>
+                                                allowfullscreen
+                                            ></iframe>
                                         </div>
                                     </div>
                                 </div>

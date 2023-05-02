@@ -40,8 +40,8 @@ class AuthService{
         $profile = Profile::create([
             'reg_number' => $data->reg_number,
             'phone_number' => $data->phone_number,
-            // 'address' => $data->address,
-            // 'sex' => $data->sex,
+            'country' => $data->country,
+            'sex' => $data->sex,
             'faculty_id' => $department->faculty_id,
             'department_id' => $data->department_id,
             'user_id' => $user_id,

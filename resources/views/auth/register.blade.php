@@ -76,6 +76,27 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group mb-3">
+                        <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
+                        <select class="form-select-mg bg-transparent form-control" name="sex" id="sex">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    @error('sex')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-transparent"><i class="ti-map"></i></span>
+                        <input type="text" value="{{ old('country') }}" class="form-control ps-15 bg-transparent" name="country" placeholder="Your Country">
+                    </div>
+                    @error('country')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
                         <span class="input-group-text bg-transparent"><i class="ti-lock"></i></span>
                         <input type="password" class="form-control ps-15 bg-transparent" name="password" placeholder="Password">
                     </div>
